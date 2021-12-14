@@ -10,7 +10,7 @@ To run scripts, you need:
 ## Usage
 
 ```
-
+python3 run.py -h
 ```
 
 ## Example
