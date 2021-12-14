@@ -17,8 +17,6 @@ def usage():
         Prints usage message.
     """
     print('Usage:', os.path.basename(sys.argv[0]), '[options] -d sdd/d-DNNF [-t vtree_file] -m feature_map -i instance_file')
-    print('Example: ./run.py -c sdd -g examples/xd6/xd6.txt -t examples/xd6/xd6_vtree.txt '
-          '-m examples/xd6/xd6_map.txt -i examples/xd6/xd6_inst.csv -x axp')
     print('Options:')
     print('        -a, --all        List all explanation')
     print('        -c, --classifier sdd or ddnnf classifier')
