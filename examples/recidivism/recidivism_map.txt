@@ -1,0 +1,45 @@
+# a feature map file
+# dataset: recidivism
+NF: 15
+Type:
+discrete,discrete,discrete,discrete,discrete,discrete,discrete,discrete,discrete,discrete,discrete,discrete,discrete,discrete,discrete
+Map:
+Race:=0:1
+Race:=1:2
+Alcohol:=0:3
+Alcohol:=1:4
+Junky:=0:5
+Junky:=1:6
+Supervised Release:=0:7
+Supervised Release:=1:8
+Married:=0:9
+Married:=1:10
+Felony:=0:11
+Felony:=1:12
+WorkRelease:=0:13
+WorkRelease:=1:14
+Crime against Property:=0:15
+Crime against Property:=1:16
+Crime against Person:=0:17
+Crime against Person:=1:18
+Gender:=0:19
+Gender:=1:20
+Priors:=0:21
+Priors:=1:22
+Priors:=2:23
+Priors:=3:24
+YearsSchool:=0:25
+YearsSchool:=1:26
+YearsSchool:=2:27
+YearsSchool:=3:28
+PrisonViolations:=0:29
+PrisonViolations:=1:30
+PrisonViolations:=2:31
+Age:=0:32
+Age:=1:33
+Age:=2:34
+Age:=3:35
+MonthsServed:=0:36
+MonthsServed:=1:37
+MonthsServed:=2:38
+MonthsServed:=3:39

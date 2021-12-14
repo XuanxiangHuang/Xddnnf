@@ -1,0 +1,72 @@
+# a feature map file
+# dataset: adult
+NF: 12
+Type:
+discrete,discrete,discrete,discrete,discrete,discrete,discrete,discrete,discrete,discrete,discrete,discrete
+Map:
+Age:=0:1
+Age:=1:2
+Age:=2:3
+Age:=3:4
+Workclass:=0:5
+Workclass:=1:6
+Workclass:=2:7
+Workclass:=3:8
+Workclass:=4:9
+Workclass:=5:10
+Workclass:=6:11
+Workclass:=7:12
+Workclass:=8:13
+Education:=0:14
+Education:=1:15
+Education:=2:16
+Education:=3:17
+Education:=4:18
+Education:=5:19
+Education:=6:20
+Marital Status:=0:21
+Marital Status:=1:22
+Marital Status:=2:23
+Marital Status:=3:24
+Occupation:=0:25
+Occupation:=1:26
+Occupation:=2:27
+Occupation:=3:28
+Occupation:=4:29
+Occupation:=5:30
+Occupation:=6:31
+Occupation:=7:32
+Occupation:=8:33
+Relationship:=0:34
+Relationship:=1:35
+Relationship:=2:36
+Relationship:=3:37
+Relationship:=4:38
+Relationship:=5:39
+Race:=0:40
+Race:=1:41
+Race:=2:42
+Race:=3:43
+Race:=4:44
+Sex:=0:45
+Sex:=1:46
+Capital Gain:=0:47
+Capital Gain:=1:48
+Capital Gain:=2:49
+Capital Loss:=0:50
+Capital Loss:=1:51
+Capital Loss:=2:52
+Hours per week:=0:53
+Hours per week:=1:54
+Hours per week:=2:55
+Country:=0:56
+Country:=1:57
+Country:=2:58
+Country:=3:59
+Country:=4:60
+Country:=5:61
+Country:=6:62
+Country:=7:63
+Country:=8:64
+Country:=9:65
+Country:=10:66
