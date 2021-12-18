@@ -53,7 +53,7 @@ class XpSdd(object):
 
         self.lits = lits
 
-    def get_predict(self):
+    def get_prediction(self):
         """
             Return prediction of lits (which corresponds to the given instance).
 
@@ -101,7 +101,7 @@ class XpSdd(object):
         time = resource.getrusage(resource.RUSAGE_CHILDREN).ru_utime + \
                resource.getrusage(resource.RUSAGE_SELF).ru_utime
 
-        pred = self.get_predict()
+        pred = self.get_prediction()
         # get/create fix array
         if not fixed:
             fix = [True for _ in range(self.nf)]
@@ -152,7 +152,7 @@ class XpSdd(object):
         time = resource.getrusage(resource.RUSAGE_CHILDREN).ru_utime + \
                resource.getrusage(resource.RUSAGE_SELF).ru_utime
 
-        pred = self.get_predict()
+        pred = self.get_prediction()
         # get/create univ array
         if not universal:
             univ = [True for _ in range(self.nf)]
@@ -195,6 +195,7 @@ class XpSdd(object):
     def enum_exps(self):
         """
             Enumerate all (abductive and contrastive) explanations, using MARCO algorithm.
+
             :return: a list of all Axps, a list of all Cxps.
         """
 
@@ -217,7 +218,7 @@ class XpSdd(object):
         time = resource.getrusage(resource.RUSAGE_CHILDREN).ru_utime + \
                resource.getrusage(resource.RUSAGE_SELF).ru_utime
 
-        pred = self.get_predict()
+        pred = self.get_prediction()
 
         num_axps = 0
         num_cxps = 0
@@ -266,7 +267,7 @@ class XpSdd(object):
             :return: true if it is subset-minimal weak axp, else false.
         """
         # get prediction of literals
-        pred = self.get_predict()
+        pred = self.get_prediction()
         # get/create fix array
         fix = [False] * self.nf
         for i in axp:
@@ -312,7 +313,7 @@ class XpSdd(object):
             :return: true if it is subset-minimal weak cxp, else false.
         """
         # get prediction of literals
-        pred = self.get_predict()
+        pred = self.get_prediction()
         # get/create univ array
         univ = [False] * self.nf
         for i in cxp:
