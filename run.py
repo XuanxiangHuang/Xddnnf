@@ -9,6 +9,7 @@ from __future__ import print_function
 import sys,os,getopt
 from pysdd.sdd import Vtree, SddManager
 from xddnnf.xpsdd import XpSdd
+from xddnnf.xpddnnf import XpdDnnf
 ################################################################################
 
 
@@ -99,6 +100,8 @@ if __name__ == '__main__':
     if not dag or not inst or not fvmap:
         exit(0)
 
+    explainer = None
+
     if classifier == 'sdd':
         # string to bytes
         sdd_file = bytes(dag, 'utf-8')
@@ -111,25 +114,28 @@ if __name__ == '__main__':
 
         xpsdd = XpSdd(root, verb=1)
         xpsdd.parse_feature_map(fvmap)
-
-        with open(inst, 'r') as fp:
-            lines = fp.readlines()
-        lines = list(filter(lambda l: (not (l.startswith('#') or l.strip() == '')), lines))
-        for idx, line in enumerate(lines):
-            inst = line.strip().split(',')
-            print(f'#{idx}-th instance {inst}')
-            xpsdd.parse_instance(inst)
-            if all_xp:
-                print("list all XPs ...")
-                axps, cxps = xpsdd.enum_exps()
-            elif xtype == 'axp':
-                print("find an axp ...")
-                axp = xpsdd.find_axp()
-            elif xtype == 'cxp':
-                print("find a cxp ...")
-                cxp = xpsdd.find_cxp()
+        explainer = xpsdd
     else:
-        print("haven't implemented")
-        exit()
+        xpddnnf = XpdDnnf.from_file(dag, verb=1)
+        xpddnnf.parse_feature_map(fvmap)
+        explainer = xpddnnf
 
+    assert explainer
+
+    with open(inst, 'r') as fp:
+        lines = fp.readlines()
+    lines = list(filter(lambda l: (not (l.startswith('#') or l.strip() == '')), lines))
+    for idx, line in enumerate(lines):
+        inst = line.strip().split(',')
+        print(f'#{idx}-th instance {inst}')
+        explainer.parse_instance(inst)
+        if all_xp:
+            print("list all XPs ...")
+            axps, cxps = explainer.enum_exps()
+        elif xtype == 'axp':
+            print("find an axp ...")
+            axp = explainer.find_axp()
+        elif xtype == 'cxp':
+            print("find a cxp ...")
+            cxp = explainer.find_cxp()
     exit(0)

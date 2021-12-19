@@ -263,7 +263,7 @@ class XpSdd(object):
             Check if given axp is a subset-minimal weak axp
             of instance.
 
-            :param axp: given axp
+            :param axp: given axp.
             :return: true if it is subset-minimal weak axp, else false.
         """
         # get prediction of literals
@@ -276,7 +276,7 @@ class XpSdd(object):
         for i in range(self.nf):
             if not fix[i]:
                 lits_[i] = None
-        # it is a weak AXp
+        # 1) it is a weak AXp
         tmp = self.root
         for lit_ in lits_:
             if lit_:
@@ -285,7 +285,7 @@ class XpSdd(object):
         if (pred and not tmp.is_true()) or (not pred and not tmp.is_false()):
             print(f'given axp {axp} is not a weak AXp')
             return False
-        # it is subset-minimal
+        # 2) it is subset-minimal
         for i in range(self.nf):
             if fix[i]:
                 fix[i] = not fix[i]
@@ -309,7 +309,7 @@ class XpSdd(object):
             Check if given cxp is a subset-minimal weak cxp
             of instance.
 
-            :param cxp: given cxp
+            :param cxp: given cxp.
             :return: true if it is subset-minimal weak cxp, else false.
         """
         # get prediction of literals
@@ -322,7 +322,7 @@ class XpSdd(object):
         for i in range(self.nf):
             if univ[i]:
                 lits_[i] = None
-        # it is a weak CXp
+        # 1) it is a weak CXp
         tmp = self.root
         for lit_ in lits_:
             if lit_:
@@ -331,7 +331,7 @@ class XpSdd(object):
         if (pred and tmp.is_true()) or (not pred and tmp.is_false()):
             print(f'given axp {cxp} is not a weak CXp')
             return False
-        # it is subset-minimal
+        # 2) it is subset-minimal
         for i in range(self.nf):
             if univ[i]:
                 univ[i] = not univ[i]
