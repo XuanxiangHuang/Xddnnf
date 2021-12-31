@@ -7,7 +7,6 @@
 ################################################################################
 import resource
 import networkx as nx
-from copy import deepcopy
 from pysat.formula import IDPool
 from pysat.solvers import Solver
 from xddnnf.parsing import *
@@ -331,18 +330,11 @@ class XpdDnnf(object):
             fix = fixed.copy()
         assert (len(fix) == self.nf)
 
-        lits_ = deepcopy(self.lits)
-        for i in range(self.nf):
-            if not fix[i]:
-                lits_[i] = None
-
         for i in range(self.nf):
             if fix[i]:
                 fix[i] = not fix[i]
-                lits_[i] = None
                 if (pred and not self.check_ICoVa([not v for v in fix], va=True)) or \
                         (not pred and not self.check_ICoVa([not v for v in fix], va=False)):
-                    lits_[i] = self.lits[i]
                     fix[i] = not fix[i]
 
         axp = [i for i in range(self.nf) if fix[i]]
@@ -378,18 +370,11 @@ class XpdDnnf(object):
             univ = universal.copy()
         assert (len(univ) == self.nf)
 
-        lits_ = deepcopy(self.lits)
-        for i in range(self.nf):
-            if univ[i]:
-                lits_[i] = None
-
         for i in range(self.nf):
             if univ[i]:
                 univ[i] = not univ[i]
-                lits_[i] = self.lits[i]
                 if (pred and self.check_ICoVa(univ, va=True)) or \
                         (not pred and self.check_ICoVa(univ, va=False)):
-                    lits_[i] = None
                     univ[i] = not univ[i]
 
         cxp = [i for i in range(self.nf) if univ[i]]
@@ -484,10 +469,6 @@ class XpdDnnf(object):
         fix = [False] * self.nf
         for i in axp:
             fix[i] = True
-        lits_ = deepcopy(self.lits)
-        for i in range(self.nf):
-            if not fix[i]:
-                lits_[i] = None
         # 1) axp is a weak AXp
         if (pred and not self.check_ICoVa([not v for v in fix], va=True)) or \
                 (not pred and not self.check_ICoVa([not v for v in fix], va=False)):
@@ -497,10 +478,8 @@ class XpdDnnf(object):
         for i in range(self.nf):
             if fix[i]:
                 fix[i] = not fix[i]
-                lits_[i] = None
                 if (pred and not self.check_ICoVa([not v for v in fix], va=True)) or \
                         (not pred and not self.check_ICoVa([not v for v in fix], va=False)):
-                    lits_[i] = self.lits[i]
                     fix[i] = not fix[i]
                 else:
                     print(f'given axp {axp} is not subset-minimal')
@@ -519,10 +498,6 @@ class XpdDnnf(object):
         univ = [False] * self.nf
         for i in cxp:
             univ[i] = True
-        lits_ = deepcopy(self.lits)
-        for i in range(self.nf):
-            if univ[i]:
-                lits_[i] = None
         # 1) cxp is a weak CXp
         if (pred and self.check_ICoVa(univ, va=True)) or \
                 (not pred and self.check_ICoVa(univ, va=False)):
@@ -532,10 +507,8 @@ class XpdDnnf(object):
         for i in range(self.nf):
             if univ[i]:
                 univ[i] = not univ[i]
-                lits_[i] = self.lits[i]
                 if (pred and self.check_ICoVa(univ, va=True)) or \
                         (not pred and self.check_ICoVa(univ, va=False)):
-                    lits_[i] = None
                     univ[i] = not univ[i]
                 else:
                     print(f'given cxp {cxp} is not subset-minimal')
