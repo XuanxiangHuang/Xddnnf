@@ -5,6 +5,7 @@
 #   Author: Xuanxiang Huang
 #
 ################################################################################
+import numpy as np
 import resource
 import networkx as nx
 from pysat.formula import IDPool
@@ -191,7 +192,7 @@ class XpdDnnf(object):
                         assign.update({nd: 0})
 
         assert assign[self.root] == 1 or assign[self.root] == 0
-        return assign[self.root] == 1
+        return assign[self.root]
 
     def check_ICoVa(self, univ, va=True):
         """
@@ -514,3 +515,15 @@ class XpdDnnf(object):
                     print(f'given cxp {cxp} is not subset-minimal')
                     return False
         return True
+
+    def predict(self, instances):
+        """
+            Return a list of prediction given a list of instances.
+            :param instances: a list of (total) instance.
+            :return: predictions of these instances
+        """
+        predictions = []
+        for inst in instances:
+            self.parse_instance([int(e) for e in list(inst)])
+            predictions.append(self.get_prediction())
+        return np.array(predictions)
